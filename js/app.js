@@ -1,69 +1,88 @@
 let wrapper = document.querySelector(".content-list");
 let elCountrySelect = document.querySelector(".country-select");
-
+let likeCount = document.querySelector(".like-count")
+let saveCount = document.querySelector(".save-count")
 const countrys = [
     {
         id: 1,
         name: "Wallis and Futuna",
         capital: "Mata-Utu",
         population: 11750,
-        flag: "https://flagcdn.com/wf.svg"
+        flag: "https://flagcdn.com/wf.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 5,
         name: "Comoros",
         capital: "Moroni",
         population: 869595,
-        flag: "https://flagcdn.com/km.svg"
+        flag: "https://flagcdn.com/km.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 3,
         name: "Luxembourg",
         capital: "Luxembourg",
         population: 632275,
-        flag: "https://flagcdn.com/lu.svg"
+        flag: "https://flagcdn.com/lu.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 4,
         name: "Mali",
         capital: "Bamako",
         population: 20250834,
-        flag: "https://flagcdn.com/ml.svg"
+        flag: "https://flagcdn.com/ml.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 2,
         name: "Iceland",
         capital: "Reykjavik",
         population: 366425,
-        flag: "https://flagcdn.com/is.svg"
+        flag: "https://flagcdn.com/is.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 7,
         name: "Estonia",
         capital: "Tallinn",
         population: 1331057,
-        flag: "https://flagcdn.com/ee.svg"
+        flag: "https://flagcdn.com/ee.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 6,
         name: "Australia",
         capital: "Canberra",
         population: 25687041,
-        flag: "https://flagcdn.com/au.svg"
+        flag: "https://flagcdn.com/au.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 8,
         name: "Canada",
         capital: "Ottawa",
         population: 38005238,
-        flag: "https://flagcdn.com/ca.svg"
+        flag: "https://flagcdn.com/ca.svg",
+        isLiked:false,
+        isBasket:false
     },
     {
         id: 9,
         name: "Belarus",
         capital: "Minsk",
         population: 9398861,
-        flag: "https://flagcdn.com/by.svg"
+        flag: "https://flagcdn.com/by.svg",
+        isLiked:false,
+        isBasket:false
     }
 ];
 
@@ -82,14 +101,18 @@ function renderUsers(arr) {
                     <p style="font-size: 15px;">Population: ${item.population}</p>
                 </div>
                 <div class="btn">
-                    <button>Like</button>
-                    <button>Save</button>
-                    <button>More</button>
+                    <button onclick="handleLikeBtnClick(${item.id})" class="${item.isLiked ? "bg-red-500 text-white" : "bg-white text-black"}">Like</button>
+                    <button onclick="handSavedBtnClick(${item.id})" class="${item.isBasket ? "bg-orange-500 text-white" : "bg-white text-black"}">Save</button>
+                    <button class="bg-green-500 text-black">More</button>
                 </div>
             </div>
         `;
         ul.appendChild(li);
     });
+
+    // Update like count
+    likeCount.textContent = arr.filter(item => item.isLiked).length;
+    saveCount.textContent = arr.filter(item => item.isBasket).length;
 
     wrapper.innerHTML = '';
     wrapper.appendChild(ul);
@@ -115,3 +138,15 @@ elCountrySelect.addEventListener("change", (e) => {
         renderUsers(filteredCapital)
     }
 })
+
+function handleLikeBtnClick(id){
+    const findedObj = countrys.find(item => item.id == id)
+    findedObj.isLiked = !findedObj.isLiked
+    renderUsers(countrys)
+}
+
+function handSavedBtnClick(id){
+    const findedObj = countrys.find(item => item.id == id)
+    findedObj.isBasket = !findedObj.isBasket
+    renderUsers(countrys)
+}
