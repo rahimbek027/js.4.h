@@ -72,5 +72,46 @@ body{
             }
         }
     }
+
+    .content-list{
+       
+        max-width: 1280px;
+        margin: auto;
+        margin-block-start: 50px;
+        
+
+        ul{
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+
+            .card{
+                background-color: rgb(154, 148, 148);
+                border-radius: 10px;
+
+                display: grid;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 15px;
+                padding-inline: 10px;
+                padding-block-end: 10px;
+
+                .btn{
+
+                    button{
+                        height: 44px;
+                        padding: 5px;
+                        border-radius: 40px;
+                        cursor: pointer;
+                    }
+                }
+                
+            }
+        }
+        
+    }
    
 }
